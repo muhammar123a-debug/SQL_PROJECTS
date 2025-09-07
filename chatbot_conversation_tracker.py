@@ -67,6 +67,11 @@ for i in cursor.fetchall():
 cursor.execute("SELECT * FROM Messages")
 for i in cursor.fetchall():
     print(i)
+
+cursor.execute("SELECT u.username, m.message, m.timestamp FROM Users u JOIN Conversations c ON u.id = c.user_id JOIN Messages m ON c.id = m.conversation_id WHERE u.username = %s", ('ammar',))
+for i in cursor.fetchall():
+    print(i)
+
 connect.commit()
 
 print("Users table created successfully.")
