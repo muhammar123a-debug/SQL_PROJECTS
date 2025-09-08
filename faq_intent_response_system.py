@@ -99,6 +99,18 @@ SELECT * FROM Messages
 for i in cursor.fetchall():
     print(i)
 
+cursor.execute("""
+SELECT * FROM Intents
+""")
+for i in cursor.fetchall():
+    print(i)
+
+cursor.execute("""
+SELECT * FROM Responses
+""")
+for i in cursor.fetchall():
+    print(i)
+
 conn.commit()
 cursor.close()
 conn.close()
