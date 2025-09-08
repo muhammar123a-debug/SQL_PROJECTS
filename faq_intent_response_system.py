@@ -79,8 +79,25 @@ for i in cursor.fetchall():
     print(i)
 
 cursor.execute("""
-INSERT INTO Messsages (user_id, message, intent_id) VALUES (1, 'Hello, how can I reset my password?', 1), (3, 'What are your business hours?', 2)
+INSERT INTO Intents (name, description) VALUES ('password_reset', 'User asking about password reset')
 """)
+
+cursor.execute("""
+INSERT INTO Messages (user_id, message, intent_id) VALUES (1, 'Hello, how can I reset my password?', 1)
+""")
+
+# Update message text
+cursor.execute("""
+UPDATE Messages 
+SET message = %s 
+WHERE id = %s
+""", ("Hello, I just joined the chatbot!", 1))
+
+cursor.execute("""
+SELECT * FROM Messages
+""")
+for i in cursor.fetchall():
+    print(i)
 
 conn.commit()
 cursor.close()
